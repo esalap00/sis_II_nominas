@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-Mar-2023 11:41:16 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mapping.Trabajador" table="trabajador" catalog="mydb" optimistic-lock="version">
+        <id name="idtrabajador" type="int">
+            <column name="idtrabajador" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="categorias" class="mapping.Categorias" fetch="select">
+            <column name="IdCategoria" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresas" class="mapping.Empresas" fetch="select">
+            <column name="IdEmpresa" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="50" not-null="true" />
+        </property>
+        <property name="apellido1" type="string">
+            <column name="Apellido1" length="75" not-null="true" />
+        </property>
+        <property name="apellido2" type="string">
+            <column name="Apellido2" length="75" />
+        </property>
+        <property name="nifnie" type="string">
+            <column name="NIFNIE" length="10" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="75" />
+        </property>
+        <property name="fechaAlta" type="date">
+            <column name="FechaAlta" length="10" />
+        </property>
+        <property name="codigoCuenta" type="string">
+            <column name="CodigoCuenta" length="20" />
+        </property>
+        <property name="iban" type="string">
+            <column name="IBAN" length="24" />
+        </property>
+        <property name="bajaLaboral" type="date">
+            <column name="BajaLaboral" length="10" />
+        </property>
+        <property name="altaLaboral" type="date">
+            <column name="AltaLaboral" length="10" />
+        </property>
+        <set name="nominas" table="nomina" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IdTrabajador" />
+            </key>
+            <one-to-many class="mapping.Nomina" />
+        </set>
+    </class>
+</hibernate-mapping>
